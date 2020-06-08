@@ -43,8 +43,7 @@ target 'medsmate' do
 
   # react-native-cli autolinking
   use_native_modules!
-  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 
 end

@@ -18,7 +18,7 @@ const changeHandler =(val)=>{
             />
             <Button title='Add Med' color='coral' onPress={()=>submitHandler(text)}/>
                 
-        </View>
+        </View>   
 
     )
 }
