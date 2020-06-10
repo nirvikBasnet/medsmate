@@ -5,7 +5,7 @@ import { Appbar } from 'react-native-paper';
 
 
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
 
 
   return (
@@ -29,8 +29,8 @@ const LoginScreen = () => {
       <Button icon="login" mode="contained">
         Login
 </Button>
-      <Button icon="login" mode="contained" color='orange' onPress={() => console.log('Pressed')}>
-        SignUp
+      <Button icon="login" mode="contained" color='orange' onPress={() => props.navigation.navigate('Signup')}>
+        SignUp Instead
 </Button>
 
     </View>

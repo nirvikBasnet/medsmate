@@ -18,7 +18,10 @@ export default function App() {
   const Stack = createStackNavigator();
     return (
       <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+     
+      >
+        
       <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         

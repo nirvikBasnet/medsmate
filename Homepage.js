@@ -8,14 +8,11 @@ import AddMeds from './components/addMeds';
 
 
 export default function Homepage() {
-  const [meds,setMeds] = useState([
-    {text: 'Paracytamol', key:'1'},
-    {text: 'Flexon', key:'2'},
-    {text: 'Sytrane', key:'3'}
-
-  ])
+  const [meds,setMeds] = useState();
 
   const submitHandler = (text) => {
+    
+
     if(text.length > 3){
     setMeds((prevMeds)=>{
       return [
