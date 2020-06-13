@@ -27,9 +27,9 @@ const SignupScreen =(props)=>{
     .then(async (data)=>{
            try {
              await AsyncStorage.setItem('token',data.token)
-             props.navigation.replace("home")
+             props.navigation.navigate("Home")
            } catch (e) {
-             console.log("error hai",e)
+             console.log("error",e)
            }
     })
  }
@@ -59,7 +59,7 @@ const SignupScreen =(props)=>{
             />
 
           
-            <Button icon="login" mode="contained" color='orange' onPress={() => sendCred()}>
+            <Button icon="login" mode="contained" color='orange' onPress={() => sendCred(props)}>
                 Sign Up
             </Button>
             <Button icon="login" mode="contained" onPress={() => props.navigation.navigate('Login')}>

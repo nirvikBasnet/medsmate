@@ -1,14 +1,24 @@
 import  React, {useState} from 'react';
 import { StyleSheet,View, Text, ScrollView, FlatList, TouchableOpacity, Alert } from 'react-native';
+import {Button} from 'react-native-paper';
 import Header from './components/header';
 import MedsItems from './components/medsItem';
 import AddMeds from './components/addMeds';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 
 
-export default function Homepage() {
+export default function Homepage(props) {
   const [meds,setMeds] = useState();
+
+
+  const logout =(props)=>{
+  AsyncStorage.removeItem("token").then(()=>{
+    props.navigation.navigate("Signup")
+  })
+
+  }
 
   const submitHandler = (text) => {
     
@@ -56,7 +66,9 @@ export default function Homepage() {
           )}
 
           />
-          
+          <Button icon="login" mode="contained" color='orange' onPress={() => logout(props)}>
+           Logout
+          </Button>
           
         </View>
       </View>
