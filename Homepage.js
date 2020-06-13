@@ -1,16 +1,70 @@
-import  React, {useState} from 'react';
-import { StyleSheet,View, Text, ScrollView, FlatList, TouchableOpacity, Alert } from 'react-native';
-import {Button} from 'react-native-paper';
+import  React, {useState,useEffect} from 'react';
+import { StyleSheet,View, Text, Alert } from 'react-native';
+import {Button, TextInput} from 'react-native-paper';
 import Header from './components/header';
-import MedsItems from './components/medsItem';
-import AddMeds from './components/addMeds';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
 
 
 export default function Homepage(props) {
-  const [meds,setMeds] = useState();
+
+
+  
+  const [username,setUsername] = useState('');
+  const [description,setDescription] = useState('');
+  const [duration,setDuration] = useState('');
+
+
+ 
+
+
+  useEffect(()=>{
+    async function tokenAuth(){
+      const token = await AsyncStorage.getItem("token");
+  
+      fetch('http://192.168.1.144:3000/',{
+        headers : new Headers({
+          Authorization : "Bearer "+token
+        })
+  
+      }).then(res=>res.json())
+      .then(data=>{
+        setUsername(data.email)
+      })
+  
+    }
+
+  tokenAuth();
+    
+
+  },[])
+
+
+  const addMeds= async (props)=>{
+    fetch("http://192.168.1.144:3000/meds/add",{
+      method:"POST",
+      headers: {
+       'Content-Type': 'application/json'
+     },
+     body:JSON.stringify({
+       "username":username,
+       "description":description,
+       "duration":duration
+     })
+    })
+    .then(res=>res.json())
+    .then(()=>{
+           try {
+             Alert.alert("Pill Saved","Your Pill is saved Sucefully")
+           } catch (e) {
+             console.log("error",e)
+           }
+    })
+ }
+
+
+
 
 
   const logout =(props)=>{
@@ -20,58 +74,44 @@ export default function Homepage(props) {
 
   }
 
-  const submitHandler = (text) => {
-    
-
-    if(text.length > 3){
-    setMeds((prevMeds)=>{
-      return [
-        {text: text, key: Math.random().toString()},
-        ...prevMeds
-      ];
-
-    });
-  }
-  else{
-    Alert.alert('OPPS!','Meds Must Be More Then 3 Char', [
-      {text:'Understood'}
-    ]);
-
-  }
-  }
-
-  const pressHandler = (key) => {
-    setMeds((prevMeds)=>{
-      return prevMeds.filter(med=>med.key !=key);
-    })
-  }
 
 
   
     return (
     <View style={styles.container}>
       <Header/>
-      <View style={styles.content}>
-        <AddMeds submitHandler={submitHandler}/>
-        <View style={styles.list}>
-          <FlatList
-          data={meds}
-          renderItem={({ item })=>(
-            <MedsItems 
-            item ={ item }
-            pressHandler={pressHandler}
-            
-            />
+      <Text style={styles.text}>
+        Welcome {username} !!
+      </Text>
+      <TextInput
+        label='Username'
+        value={username}
+        disabled='true'
+        onChangeText={(text)=>setUsername(text)}
 
-          )}
+      />
+      <TextInput
+        label='Description'
+        onChangeText={(text)=>setDescription(text)}
 
-          />
-          <Button icon="login" mode="contained" color='orange' onPress={() => logout(props)}>
-           Logout
-          </Button>
-          
-        </View>
-      </View>
+        />
+        <TextInput
+        label='Duration'
+        onChangeText={(text)=>setDuration(text)}
+        />
+
+        <Button style={styles.addbutton} icon="plus" mode="contained" color='blue' onPress={()=>addMeds(props)}>Add</Button>
+
+
+        <Button style={styles.addbutton} icon="table" mode="contained" color='green'>Your Medicines</Button>
+
+
+
+
+      
+      
+      <Button style={styles.logoutbutton} icon="logout" mode="contained" color='red' onPress={()=>logout(props)}
+      >Logout</Button>
   
     </View>
   
@@ -80,8 +120,10 @@ export default function Homepage(props) {
 
 const styles = StyleSheet.create({
   container :{
-    flex : 1,
-  
+ 
+   
+  flex:1,
+  flexDirection:"column"
 
    
   
@@ -93,6 +135,26 @@ const styles = StyleSheet.create({
   list :{
     marginTop:20
 
+  },
+  text:{
+    fontSize:20,
+    fontWeight:"bold",
+    marginHorizontal:120,
+    color:'green'
+    
+    
+    
+  },
+  addbutton:{
+    marginBottom:10,
+    marginTop:10
+  },
+  logoutbutton:{
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    bottom: 50
+
+    
   }
 
 

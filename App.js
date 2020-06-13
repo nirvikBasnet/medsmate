@@ -32,7 +32,7 @@ export default function App() {
     }
 
   }
-  useEffect(async () => {
+  useEffect(() => {
 
   
     detectLogin();
@@ -62,7 +62,7 @@ export default function App() {
             <Stack.Screen name="Signup" component={SignupScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
 
-          <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="Home" component={HomePage} />
             </>
           )
 
