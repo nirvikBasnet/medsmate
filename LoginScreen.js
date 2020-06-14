@@ -26,7 +26,7 @@ const LoginScreen = (props) => {
     .then(async (data)=>{
            try {
              await AsyncStorage.setItem('token',data.token)
-             props.navigation.navigate("Home")
+             props.navigation.replace("Home")
            } catch (e) {
              Alert.alert("Wrong Crendentials!!","Please check your username and password and try Again!!")
             

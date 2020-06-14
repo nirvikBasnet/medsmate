@@ -12,6 +12,7 @@ export default function Homepage(props) {
 
   
   const [username,setUsername] = useState('');
+  const [medsname,setMedsname] = useState('');
   const [description,setDescription] = useState('');
   const [duration,setDuration] = useState('');
 
@@ -49,6 +50,7 @@ export default function Homepage(props) {
      },
      body:JSON.stringify({
        "username":username,
+       "medsname":medsname,
        "description":description,
        "duration":duration
      })
@@ -56,8 +58,9 @@ export default function Homepage(props) {
     .then(res=>res.json())
     .then(()=>{
            try {
-             Alert.alert("Pill Saved","Your Pill is saved Sucefully")
+             Alert.alert("Pill Saved","Your Pill is saved Sucefully.")
            } catch (e) {
+            Alert.alert("An Error occured", "Please Fill the required fields.")
              console.log("error",e)
            }
     })
@@ -91,7 +94,15 @@ export default function Homepage(props) {
 
       />
       <TextInput
+        label='Name Of Your Pill'
+        value={medsname}
+        
+        onChangeText={(text)=>setMedsname(text)}
+
+      />
+      <TextInput
         label='Description'
+        maxLength={50}
         onChangeText={(text)=>setDescription(text)}
 
         />
