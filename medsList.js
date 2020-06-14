@@ -1,12 +1,15 @@
 import React, { useState, useEffect, SearchBar} from 'react';
 import { StyleSheet, View, Text, Alert, FlatList } from 'react-native';
-import { Button, Searchbar } from 'react-native-paper';
+import { Button, Searchbar, TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
 export default function MedsList(props) {
-    const [meds, setMeds] = useState([]);
+    const [meds, setMeds] = useState();
     const [username, setUsername] = useState('');
+
+
+
     
 
 
@@ -14,49 +17,64 @@ export default function MedsList(props) {
         async function tokenAuth() {
             const token = await AsyncStorage.getItem("token");
 
-            fetch('http://192.168.1.144:3000/', {
-                headers: new Headers({
-                    Authorization: "Bearer " + token
-                })
+            try {
+                const result = await fetch('http://192.168.1.144:3000/', {
+                    headers: new Headers({
+                        Authorization: "Bearer " + token
+                    })
+    
+                });
+                const json = await result.json();
+                
 
-            }).then(res => res.json())
-                .then(data => {
-                    setUsername(data.email)
-                    console.log(username)
+                setUsername(json.email)
+                
+            }
+            catch (error) {
+                
+            };
 
-                }).catch(function(error) {
-                    console.log('There has been a problem with your fetch operation: ' + error.message);
-                    
-                      throw error;
-                    });
+            
 
         }
 
         tokenAuth();
 
+       
+        
+
 
     }, [])
 
+    useEffect(() => {
+        
+
+        showMeds().then((meds)=>{
+            
+            const newMeds = meds.filter(med => { return med.username === username });
+           console.log(newMeds)
+            getMedByUser(newMeds)
+             
+    
+        });
+    
+    
+    }, [username])
+
+
     async function showMeds() {
 
-
-        fetch('http://192.168.1.144:3000/meds/', {
-
-
-
-        }).then(res => res.json())
-            .then(data => {
-                setMeds(data)
-                
-
+        try {
+            const result = await fetch('http://192.168.1.144:3000/meds/');
+            const json = await result.json();
+        // alert(JSON.stringify(json))
+            return json;
+        }
+        catch (error) {
+        };
 
 
-            }).catch(function(error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
-                
-                  throw error;
-                });
-
+      
     }
 
     function deleteMeds(id) {
@@ -83,14 +101,19 @@ export default function MedsList(props) {
 
 
 
-    useEffect(() => {
+    
+
+  function getMedByUser(meds){
+
+        setMeds(meds)
+        console.log(meds)
+   
+   
+
+  }
 
 
-        showMeds();
-
-
-    }, [])
-
+   
    
 
   
@@ -98,8 +121,9 @@ export default function MedsList(props) {
         <View style={styles.container} >
         
             <Text style={styles.header}>Your Medicine</Text>
-            <Text style={styles.header}>{username}</Text>
-            <Button onPress={() => showMeds()}>refresh</Button>
+            <TextInput 
+            disabled="true">Medicines For {username}</TextInput>
+            
             <Button onPress={() => props.navigation.navigate("Home")}>Go Back</Button>
          
             <View style={styles.content}>

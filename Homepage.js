@@ -42,7 +42,7 @@ export default function Homepage(props) {
 
   },[])
 
-
+ 
   const addMeds= async (props)=>{
     fetch("http://192.168.1.144:3000/meds/add",{
       method:"POST",
@@ -65,7 +65,7 @@ export default function Homepage(props) {
              console.log("error",e)
            }
     }).catch(function(error) {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
+      Alert.alert("An Error occured", "Please Fill the required fields.")
       
         throw error;
       });
@@ -81,6 +81,7 @@ export default function Homepage(props) {
   })
 
   }
+
 
 
 

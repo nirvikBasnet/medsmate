@@ -52,6 +52,7 @@ export default function App() {
 
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="MedsList" component={MedsList} />
+          <Stack.Screen name="Login" component={LoginScreen} />
           
         
           
