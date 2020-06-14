@@ -28,7 +28,11 @@ export default function MedsList(props) {
                     setUsername(data.email)
                     console.log(username)
 
-                })
+                }).catch(function(error) {
+                    console.log('There has been a problem with your fetch operation: ' + error.message);
+                    
+                      throw error;
+                    });
 
         }
 
@@ -51,7 +55,11 @@ export default function MedsList(props) {
 
 
 
-            })
+            }).catch(function(error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                
+                  throw error;
+                });
 
     }
 
@@ -66,7 +74,11 @@ export default function MedsList(props) {
                 showMeds()
 
 
-            })
+            }).catch(function(error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                
+                  throw error;
+                });
     }
 
 

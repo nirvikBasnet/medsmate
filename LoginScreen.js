@@ -31,7 +31,11 @@ const LoginScreen = (props) => {
              Alert.alert("Wrong Crendentials!!","Please check your username and password and try Again!!")
             
            }
-    })
+    }).catch(function(error) {
+      console.log('There has been a problem with your fetch operation: ' + error.message);
+      
+        throw error;
+      });
  }
 
 

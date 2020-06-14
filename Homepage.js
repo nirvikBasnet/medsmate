@@ -32,7 +32,8 @@ export default function Homepage(props) {
       }).then(res=>res.json())
       .then(data=>{
         setUsername(data.email)
-      })
+      }).catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);});
   
     }
 
@@ -63,7 +64,11 @@ export default function Homepage(props) {
             Alert.alert("An Error occured", "Please Fill the required fields.")
              console.log("error",e)
            }
-    })
+    }).catch(function(error) {
+      console.log('There has been a problem with your fetch operation: ' + error.message);
+      
+        throw error;
+      });
  }
 
 
@@ -107,7 +112,7 @@ export default function Homepage(props) {
 
         />
         <TextInput
-        label='Duration'
+        label='Duration(in Hours)'
         onChangeText={(text)=>setDuration(text)}
         />
 
