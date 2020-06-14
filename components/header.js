@@ -14,11 +14,12 @@ const styles = StyleSheet.create({
     header :{
         height:80,
         paddingTop:38,
-        backgroundColor:'green'
+        backgroundColor:'#305049'
     },
     title:{
         textAlign: "center",
         fontSize: 20,
+        color:'white',
         fontWeight: 'bold'
     }
 

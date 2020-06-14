@@ -42,7 +42,7 @@ const LoginScreen = (props) => {
   return (
     <View>
       <Appbar.Header>
-        <Appbar.Content title="Welcome To MedsMate" />
+        <Appbar.Content title="Login" />
       </Appbar.Header>
 
       <TextInput
@@ -63,33 +63,16 @@ const LoginScreen = (props) => {
 
       />
 
-      <Button icon="login" mode="contained" onPress={() => sendCred(props)}>
+      <Button icon="login" mode="contained" color="orange" onPress={() => sendCred(props)}>
         Login
     </Button>
-      <Button icon="login" mode="contained" color='orange' onPress={()=>props.navigation.navigate("Signup")}>
-        SignUp Instead
+      <Button icon="login"  onPress={()=>props.navigation.navigate("Signup")}>
+        Don't have an account??
 </Button>
 
     </View>
   );
 }
 
-
-
-const styles = StyleSheet.create({
-
-
-  inputext: {
-    fontSize: 20,
-    flex: 1,
-    alignContent: "center",
-    justifyContent: 'center'
-
-
-
-
-
-  }
-});
 
 export default LoginScreen;

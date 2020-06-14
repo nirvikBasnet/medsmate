@@ -6,12 +6,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export default function MedsList(props) {
     const [meds, setMeds] = useState([]);
-    const [id, setId] = useState('');
     const [username, setUsername] = useState('');
-    const [arrayholder, setArrayholder] = useState([])
-
-    const [description, setDescription] = useState('');
-    const [duration, setDuration] = useState('');
+    
 
 
     useEffect(() => {
@@ -125,7 +121,7 @@ export default function MedsList(props) {
                                     
                                    
 
-                                    <Text >{item.username}</Text>
+                                    <Text >Added By : {item.username}</Text>
                                     <Text style={styles.mednameText}>{item.medsname}</Text>
 
 

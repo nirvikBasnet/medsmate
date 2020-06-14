@@ -40,9 +40,9 @@ const SignupScreen =(props)=>{
     return (
       <View>
        <Appbar.Header>
-       <Appbar.Content title="Welcome To MedsMate" />
+       <Appbar.Content title="Sign Up" />
     </Appbar.Header>
-
+      
     <TextInput
 
                 label='Username'
@@ -63,8 +63,8 @@ const SignupScreen =(props)=>{
             <Button icon="login" mode="contained" color='orange' onPress={() => sendCred(props)}>
                 Sign Up
             </Button>
-            <Button icon="login" mode="contained" onPress={() => props.navigation.navigate('Login')}>
-                Login Instead
+            <Button icon="login" onPress={() => props.navigation.navigate('Login')}>
+                Already have account?
             </Button>
        
       </View>
