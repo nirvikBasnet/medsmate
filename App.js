@@ -7,6 +7,7 @@ import HomePage from './Homepage';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
 import AsyncStorage from '@react-native-community/async-storage';
+import MedsList from './medsList';
 
 
 
@@ -48,6 +49,7 @@ export default function App() {
           <>
 
           <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name="MedsList" component={MedsList} />
           <Stack.Screen name="Signup" component={SignupScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
 
@@ -63,6 +65,8 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginScreen} />
 
             <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="MedsList" component={MedsList} />
+            
             </>
           )
 

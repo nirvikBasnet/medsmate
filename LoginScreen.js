@@ -45,8 +45,8 @@ const LoginScreen = (props) => {
 
         clearButtonMode="always"
 
-        label='Email'
-        email
+        label='Username'
+       
          onChangeText={(text)=>setEmail(text)}
 
       />

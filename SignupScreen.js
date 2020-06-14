@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const SignupScreen =(props)=>{
 
-  const [email,setEmail] = useState('');
+  const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
   
 
@@ -19,7 +19,7 @@ const SignupScreen =(props)=>{
        'Content-Type': 'application/json'
      },
      body:JSON.stringify({
-       "email":email,
+       "email":username,
        "password":password
      })
     })
@@ -44,9 +44,9 @@ const SignupScreen =(props)=>{
 
     <TextInput
 
-                label='Email'
-                value ={email}
-                onChangeText={(text)=>setEmail(text)}
+                label='Username'
+                value ={username}
+                onChangeText={(text)=>setUsername(text)}
 
             />
             <TextInput

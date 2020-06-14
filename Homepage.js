@@ -103,7 +103,7 @@ export default function Homepage(props) {
         <Button style={styles.addbutton} icon="plus" mode="contained" color='blue' onPress={()=>addMeds(props)}>Add</Button>
 
 
-        <Button style={styles.addbutton} icon="table" mode="contained" color='green'>Your Medicines</Button>
+        <Button style={styles.addbutton} icon="table" mode="contained" color='green' onPress={()=>props.navigation.navigate('MedsList')}>Your Medicines</Button>
 
 
 
