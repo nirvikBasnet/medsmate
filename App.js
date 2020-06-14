@@ -14,6 +14,7 @@ import MedsList from './medsList';
 
 
 
+
 export default function App() {
   //to check if the user is logged in or not
   const [isLoggedin, setLogged] = useState(false);
@@ -47,11 +48,15 @@ export default function App() {
         {
         isLoggedin==true ?(
           <>
+          
 
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="MedsList" component={MedsList} />
-          <Stack.Screen name="Signup" component={SignupScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
+          
+        
+          
+         
+          
 
           </>
 

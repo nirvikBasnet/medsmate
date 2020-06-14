@@ -27,8 +27,9 @@ const SignupScreen =(props)=>{
     .then(async (data)=>{
            try {
              await AsyncStorage.setItem('token',data.token)
-             props.navigation.navigate("Home")
+             props.navigation.replace("Home")
            } catch (e) {
+             Alert.alert("Error Occured!", "Please fill the required fields")
              console.log("error",e)
            }
     })

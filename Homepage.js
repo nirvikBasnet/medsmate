@@ -72,7 +72,7 @@ export default function Homepage(props) {
 
   const logout =(props)=>{
   AsyncStorage.removeItem("token").then(()=>{
-    props.navigation.navigate("Signup")
+    props.navigation.replace("Login")
   })
 
   }

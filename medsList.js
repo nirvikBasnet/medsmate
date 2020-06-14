@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, SearchBar} from 'react';
 import { StyleSheet, View, Text, Alert, FlatList } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
@@ -8,9 +8,34 @@ export default function MedsList(props) {
     const [meds, setMeds] = useState([]);
     const [id, setId] = useState('');
     const [username, setUsername] = useState('');
+    const [arrayholder, setArrayholder] = useState([])
 
     const [description, setDescription] = useState('');
     const [duration, setDuration] = useState('');
+
+
+    useEffect(() => {
+        async function tokenAuth() {
+            const token = await AsyncStorage.getItem("token");
+
+            fetch('http://192.168.1.144:3000/', {
+                headers: new Headers({
+                    Authorization: "Bearer " + token
+                })
+
+            }).then(res => res.json())
+                .then(data => {
+                    setUsername(data.email)
+                    console.log(username)
+
+                })
+
+        }
+
+        tokenAuth();
+
+
+    }, [])
 
     async function showMeds() {
 
@@ -22,7 +47,8 @@ export default function MedsList(props) {
         }).then(res => res.json())
             .then(data => {
                 setMeds(data)
-                console.log(meds)
+                
+
 
 
             })
@@ -35,18 +61,18 @@ export default function MedsList(props) {
             method: 'DELETE',
         })
             .then(res => res.json())
-            .then(data=>{
+            .then(data => {
                 Alert.alert("Your Pill Sucessfully deleted")
                 showMeds()
-                
+
 
             })
-        }
+    }
 
-               
-          
 
-    
+
+
+
 
 
     useEffect(() => {
@@ -57,25 +83,37 @@ export default function MedsList(props) {
 
     }, [])
 
+   
 
-
-
+  
     return (
         <View style={styles.container} >
+        
             <Text style={styles.header}>Your Medicine</Text>
+            <Text style={styles.header}>{username}</Text>
             <Button onPress={() => showMeds()}>refresh</Button>
             <Button onPress={() => props.navigation.navigate("Home")}>Go Back</Button>
+         
             <View style={styles.content}>
                 <View>
+                   
                     <FlatList data={meds}
+                    
 
-                        keyExtractor={(item, index) => item._id}
+
+                        keyExtractor={(item) => item._id}
 
 
 
                         renderItem={({ item }) => {
                             return (
+
+
                                 <View style={styles.listContainer}>
+                                    
+                                   
+
+                                    <Text >{item.username}</Text>
                                     <Text style={styles.mednameText}>{item.medsname}</Text>
 
 
