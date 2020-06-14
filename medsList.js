@@ -46,20 +46,7 @@ export default function MedsList(props) {
 
     }, [])
 
-    useEffect(() => {
-        
-
-        showMeds().then((meds)=>{
-            
-            const newMeds = meds.filter(med => { return med.username === username });
-           console.log(newMeds)
-            getMedByUser(newMeds)
-             
-    
-        });
-    
-    
-    }, [username])
+ 
 
 
     async function showMeds() {
@@ -85,7 +72,7 @@ export default function MedsList(props) {
             .then(res => res.json())
             .then(data => {
                 Alert.alert("Your Pill Sucessfully deleted")
-                showMeds()
+                getMedByUser()
 
 
             }).catch(function(error) {
@@ -94,7 +81,20 @@ export default function MedsList(props) {
                   throw error;
                 });
     }
+    useEffect(() => {
+        
 
+        showMeds().then((meds)=>{
+            
+            const newMeds = meds.filter(med => { return med.username === username });
+           console.log(newMeds)
+            getMedByUser(newMeds)
+             
+    
+        });
+    
+    
+    }, [username])
 
 
 
